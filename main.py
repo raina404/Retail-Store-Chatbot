@@ -1,6 +1,13 @@
+# Retail Store Chatbot
+# Answers customer questions about store hours, location, products, and prices.
 
-##1. Create a simple chatbot for a retail store that can answer customers' frequently asked questions about store hours, location, available products, and prices.
-
+PRICES = {
+    "laptop": 750,
+    "headphone": 60,
+    "charger": 20,
+    "mouse": 25,
+    "watch": 150,
+}
 
 def get_user_name():
     return input("Please enter your name: ")
@@ -34,20 +41,17 @@ def main():
             print("We currently have laptops, headphones, chargers, mouses, and smartwatches.\n")
 
         elif choice == "4":
-            text = input("Please type your question about prices: \n ")
+            text = input("Please type your question about prices: \n ").lower()
+            found = False
 
-            if "laptop" in text:
-                print("The laptop costs $750.\n")
-            elif "headphone" in text:
-                print("The headphones cost $60.\n")
-            elif "charger" in text:
-                print("The phone charger costs $20.\n")
-            elif "mouse" in text:
-                print("The wireless mouse costs $25.\n")
-            elif "watch" in text:
-                print("The smartwatch costs $150.\n")
-            else:
-                print("Please tell me which product you want the price for\n")
+            for item, price in PRICES.items():
+                if item in text:
+                    print(f"The {item} costs ${price}.\n")
+                    found = True
+                    break
+
+            if not found:
+                print("Please tell me which product you want the price for.\n")
 
         elif choice == "5":
             print("Goodbye! Thank you for chatting with rain-retail chatbot.")
